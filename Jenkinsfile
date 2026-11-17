@@ -19,12 +19,21 @@ pipeline {
                     -v $(pwd):/usr/src \
                     sonarsource/sonar-scanner-cli \
                     -Dsonar.projectKey=frank-org_ecommerce-app \
-                    -Dsonar.organization=frank_org \
+                    -Dsonar.organization=frank-org \
                     -Dsonar.sources=. \
                     -Dsonar.host.url=https://sonarcloud.io \
                     '''
                 }
             }
+        }
+    }
+
+    post {
+        success {
+            echo '✅ SonarQube analysis completed successfully.'
+        }
+        failure {
+            echo '❌ SonarQube analysis failed.'
         }
     }
 }
