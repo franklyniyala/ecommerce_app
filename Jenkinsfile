@@ -12,7 +12,7 @@ pipeline {
 
         stage('Sonarqube Analysis') {
             steps {
-                withCredentials([strings(credentialsId: 'SONAR_TOKEN', variable: 'SONAR_TOKEN')]) {
+                withCredentials([string(credentialsId: 'SONAR_TOKEN', variable: 'SONAR_TOKEN')]) {
                     sh '''
                     docker run --rm \
                     -e SONAR_TOKEN=${SONAR_TOKEN} \
@@ -21,7 +21,7 @@ pipeline {
                     -Dsonar.projectKey=frank-org_ecommerce-app \
                     -Dsonar.organization=frank_org \
                     -Dsonar.sources=. \
-                    -sonar.host.url=https://sonarcloud.io \
+                    -Dsonar.host.url=https://sonarcloud.io \
                     '''
                 }
             }
