@@ -4,9 +4,9 @@ services:
     image: mongo:7
     container_name: ecommerce-db
     environment:
-      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME:?MongoDB username is required}
-      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD:?MongoDB password is required}
-      MONGO_INITDB_DATABASE: ${MONGO_INITDB_DATABASE:-ecommerce}
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
+      MONGO_INITDB_DATABASE: ${MONGO_INITDB_DATABASE}
     volumes:
       - data:/data/db
     ports:
