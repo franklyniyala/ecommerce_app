@@ -64,11 +64,10 @@ pipeline {
                 usernameVariable: 'MONGO_INITDB_ROOT_USERNAME', passwordVariable:
                 'MONGO_INITDB_ROOT_PASSWORD')]) {
                     withEnv(['MONGO_INITDB_DATABASE=ecommerce']) {
-                        sh 'docker-compose -f docker-compose.yml up -d'
+                        sh 'docker compose -f docker-compose.yml up -d'
                     }
                     
-                }
-                
+                }   
                 
             }
         }
