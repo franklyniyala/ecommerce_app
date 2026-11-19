@@ -26,14 +26,52 @@ pipeline {
                 }
             }
         }
+
+        stage('Build Frontend Image') {
+            steps {
+                dir('frontend') {
+                    sh 'docker build -t ekenefranklyn/ecommerce-frontend-image:v1 .' 
+                }
+            }
+        }
+
+        stage('Build Backend Image') {
+            steps {
+                dir('backend') {
+                    sh 'docker build -t ekenefranklyn/ecommerce-backend-image'
+                }
+            }
+        }
+
+        stage('Login to DockerHub') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'DOCKER_LOGIN', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+                    sh 'echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin'
+                }
+            }
+        }
+
+        stage('Push Images to DockerHub') {
+            steps {
+                sh 'docker push ekenefranklyn/ecommerce-frontend-image:v1'
+                sh 'docker push ekenefranklyn/ecommerce-backend-image:v1'
+            }
+        }
+
+        stage('Deploy Application') {
+            steps {
+                sh 'docker-compose -f docker-compose.yml up -d'
+            }
+        }
     }
 
     post {
         success {
             echo '✅ SonarQube analysis completed successfully.'
+            echo '✅ Pipeline executed successfully. Application deployed 🚀.'
         }
         failure {
-            echo '❌ SonarQube analysis failed. Check logs for details.'
+            echo '❌ Pipeline failed. Check logs for details.'
         }
     }
 }
