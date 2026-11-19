@@ -33,7 +33,7 @@ pipeline {
             echo '✅ SonarQube analysis completed successfully.'
         }
         failure {
-            echo '❌ SonarQube analysis failed.'
+            echo '❌ SonarQube analysis failed. Check logs for details.'
         }
     }
 }
