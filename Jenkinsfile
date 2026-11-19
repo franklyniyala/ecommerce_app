@@ -60,7 +60,16 @@ pipeline {
 
         stage('Deploy Application') {
             steps {
-                sh 'docker compose -f docker-compose.yml up -d'
+                withCredentials([usernamePassword(credentialsId: 'e0456e22-5995-4d0d-bb22-0347a780ca52',
+                usernameVariable: 'MONGO_INITDB_ROOT_USERNAME', passwordVariable:
+                'MONGO_INITDB_ROOT_PASSWORD')]) {
+                    withEnv(['MONGO_INITDB_DATABASE=ecommerce']) {
+                        sh 'docker-compose -f docker-compose.yml up -d'
+                    }
+                    
+                }
+                
+                
             }
         }
     }
