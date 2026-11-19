@@ -38,7 +38,7 @@ pipeline {
         stage('Build Backend Image') {
             steps {
                 dir('backend') {
-                    sh 'docker build -t ekenefranklyn/ecommerce-backend-image'
+                    sh 'docker build -t ekenefranklyn/ecommerce-backend-image .'
                 }
             }
         }
