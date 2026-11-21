@@ -61,7 +61,7 @@ pipeline {
         stage('Deploy Application') {
             steps {
                 withCredentials([usernamePassword(
-                    credentialsId: 'mongodb',
+                    credentialsId: 'mongo-db',
                     usernameVariable: 'MONGO_INITDB_ROOT_USERNAME',
                     passwordVariable: 'MONGO_INITDB_ROOT_PASSWORD'
                 )
