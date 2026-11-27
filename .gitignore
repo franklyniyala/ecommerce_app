@@ -45,3 +45,15 @@ build/
 
 # OS files
 .DS_Store
+.terraform/
+*.tfstate
+*.tfstate.*
+.terraform/
+*.tfstate
+*.tfstate.*
+.terraform/
+*.tfstate
+*.tfstate.*
+.terraform/
+*.tfstate
+*.tfstate.*
